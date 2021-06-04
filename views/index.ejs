@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+<div id="vega-vis"></div>
+</body>
+<script>
+
+    let vega = {
+        title: 'Dominant Hues in Paintings',
+        width: 700,
+        height: 700,
+            data: {values: <%- JSON.stringify(data) %>},
+        mark: {type: "circle"},
+        encoding: {
+            x: {field: "year", type: "quantitative", title: "year"},
+            y: {field: "hue", type: "quantitative", title: "hue"},
+            tooltip: [
+                {field: "artist", type: "nominal"},
+                {field: "genre", type: "nominal"},
+                {field: "year", type: "nominal"}
+            ],
+            color: {
+                field: "dominantColor",
+                scale: null,
+            }
+        }
+    }
+    vegaEmbed('#vega-vis', vega)
+
+</script>
+</html>
